@@ -16,12 +16,12 @@ const pool = new Pool({
 
 // API endpoint
 app.post("/api/insert", async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email } = req.body;
 
   try {
     const result = await pool.query(
-      "INSERT INTO form_responses (name, email, message) VALUES ($1, $2, $3) RETURNING id",
-      [name, email, message]
+      "INSERT INTO form_responses (name, email) VALUES ($1, $2) RETURNING id",
+      [name, email]
     );
 
     res.status(201).json({ status: "success", id: result.rows[0].id });
@@ -36,3 +36,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
