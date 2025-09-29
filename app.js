@@ -11,6 +11,10 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false } // required on Railway
 });
 
+await pool.connect();
+console.log("Connected to the database");
+
+
 // const pool = new Pool({
 //   user: "postgres",
 //   host: "localhost",   // or your remote server
