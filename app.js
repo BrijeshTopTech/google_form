@@ -12,7 +12,7 @@ const pool = new Pool({
 });
 
 //await pool.connect();
-console.log("Connected to the database");
+//console.log("Connected to the database");
 
 
 // const pool = new Pool({
@@ -51,4 +51,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
