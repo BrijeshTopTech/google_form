@@ -18,7 +18,7 @@ app.use(express.json());
 app.get('/', async (req, res) => {
   try {
     const result = await pool.query('SELECT NOW()');
-    res.send(`Connected to DB. Time: ${result.rows[0].now}`);
+    res.send(`Connected to Postgres DB. Time: ${result.rows[0].now}`);
   } catch (err) {
     console.error(err);
     res.status(500).send('Database connection error');
@@ -99,6 +99,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 */
+
 
 
 
