@@ -25,6 +25,21 @@ app.get('/', async (req, res) => {
   }
 });
 
+// Insert route
+app.post("/api/insert", async (req, res) => {
+  const { name, email } = req.body;
+  try {
+    const result = await pool.query(
+      "INSERT INTO form_responses (name, email) VALUES ($1, $2) RETURNING id",
+      [name, email]
+    );
+    res.status(201).json({ status: "success", id: result.rows[0].id });
+  } catch (err) {
+    console.error("DB Error:", err);
+    res.status(500).json({ status: "error", message: err.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
@@ -84,6 +99,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 */
+
 
 
 
