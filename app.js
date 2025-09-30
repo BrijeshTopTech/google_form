@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
 
@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: 'postgresql://postgres_w3c0_user:0Lkhu0xrTTIZlpJIATV5HiWNugMGu2SZ@dpg-d3e11hnfte5s73f3ep60-a/postgres_w3c0',
   ssl: {
     rejectUnauthorized: false, // Required by Render PostgreSQL
   },
@@ -84,5 +84,6 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 */
+
 
 
