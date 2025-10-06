@@ -16,8 +16,9 @@ app.use(express.json());
 // Test Route
 app.get('/', async (req, res) => {
   try {
-    const result = await pool.query('SELECT NOW()');
-    res.send(`Connected to My Postgres DB. Time: ${result.rows[0].now}`);
+    const result = await pool.query('SELECT * FROM form_responses');
+    // res.send(`Connected to My Postgres DB. Time: ${result.rows[0].now}`);
+    res.json(result.rows);
   } catch (err) {
     console.error(err);
     res.status(500).send('Database connection error');
@@ -64,6 +65,7 @@ app.post("/api/insert", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 
 
 
