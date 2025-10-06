@@ -26,7 +26,7 @@ app.get('/', async (req, res) => {
 });
 
 // Insert route
-app.post("/api/insert", async (req, res) => {
+/*app.post("/api/insert", async (req, res) => {
   const { name, email } = req.body;
   try {
     const result = await pool.query(
@@ -38,7 +38,46 @@ app.post("/api/insert", async (req, res) => {
     console.error("DB Error:", err);
     res.status(500).json({ status: "error", message: err.message });
   }
+});*/
+
+// Insert route - saves form responses into Postgres
+app.post("/api/insert", async (req, res) => {
+  try {
+    // Destructure input from request body
+    const { name, email } = req.body;
+
+    // Validate input
+    if (!name || !email) {
+      return res.status(400).json({
+        status: "error",
+        message: "Missing required fields: name and email"
+      });
+    }
+
+    // Insert into form_responses table
+    const result = await pool.query(
+      "INSERT INTO form_responses (name, email) VALUES ($1, $2) RETURNING id, name, email",
+      [name, email]
+    );
+
+    // Send back success response
+    res.status(201).json({
+      status: "success",
+      data: result.rows[0]
+    });
+
+  } catch (err) {
+    console.error("DB Insert Error:", err);
+
+    // Send error response
+    res.status(500).json({
+      status: "error",
+      message: "Database insert failed",
+      details: err.message
+    });
+  }
 });
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
@@ -99,6 +138,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 */
+
 
 
 
