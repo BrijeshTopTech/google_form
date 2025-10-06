@@ -29,7 +29,6 @@ app.post("/api/insert", async (req, res) => {
   try {
     // Destructure input from request body
     const { name, email } = req.body;
-console.log("Name = ", name, "Email = ", email); 
     // Validate input
     if (!name || !email) {
       return res.status(400).json({
@@ -65,6 +64,7 @@ console.log("Name = ", name, "Email = ", email);
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 
 
 
